@@ -1,0 +1,34 @@
+<div class="container">
+  <h1>Twitter Random</h1>
+
+  <%
+    # In our real-world application, this is not what we want. Instead, we should
+    # be checking to see if there is currently a user logged-in, and if there is,
+    # we should show her a form that will allow her to send a tweet. If there is no
+    # user logged-in, we should show the sign-in button.
+  %>
+  <% if session[:user_id] %>
+<div id="tweet">
+  <a href="/">Tweet Now</a>|<a href="/mentions">Mentions</a>|<br><br>
+  <form action="/tweet" method="post">
+    <textarea rows="4" cols="30" name="text"></textarea><br><br>
+    <input type="submit" value="Tweet!">
+  </form>
+
+  <br><br>
+      <p>
+        <button><a href="/sign_out">Sign Out</a></button>
+      </p>
+    </div>
+  <% else %>
+  <br><br>
+    <form id="sign_in" action="/sign_in" method="get">
+      <input type="submit" value="Sign In with Twitter" />
+    </form>
+    <br><br><br><br><br><br><br><br>
+  <% end %>
+
+
+</div><footer>
+<br>Made by JTWeet
+</footer>

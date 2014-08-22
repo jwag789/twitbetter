@@ -1,0 +1,27 @@
+<div class="container">
+  <h1>Twitter Random</h1>
+
+  <% if session[:user_id] %>
+<div id="tweet">
+  <a href="/">Tweet Now</a>|<a href="/followers">Mentions</a>|<a href="/random">Random</a><br><br>
+</div>
+  <h2>Hello, <%= @user.username %></h2>
+  
+  <% @mentions.each do |mention| %>
+  <div class="mention">
+  <p><%= mention.text %></p>
+  <h3>~<%= mention.user.screen_name %></h3>
+  </div>
+  <% end %>
+  <br><br>
+  <div id="tweet">
+      <p>
+        <button><a href="/sign_out">Sign Out</a></button>
+      </p>
+    </div>
+<% end %>
+
+
+</div><footer>
+<br>Made by JTWeet
+</footer>

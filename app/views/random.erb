@@ -1,0 +1,26 @@
+<div class="container">
+  <h1>Twitter Random</h1>
+
+  <% if session[:user_id] %>
+<div id="tweet">
+  <a href="/">Tweet Now</a>|<a href="/followers">Mentions</a>|<a href="/random">Random</a><br><br>
+</div>
+  <h2>Hello, <%= @user.username %></h2>
+
+<p>Pick a word. Then we'll generate random tweets from that word.</p>
+
+<form action="/random" method="post" name="random">
+  <input type="text" name="word" placeholder="Word">
+  <input type="submit" name="random" value="Submit word">
+</form>
+
+
+
+
+<div class="random_tweets">
+</div>
+
+<% end %>
+</div><footer>
+<br>Made by JTWeet
+</footer>
