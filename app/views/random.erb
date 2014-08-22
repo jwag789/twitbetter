@@ -19,6 +19,13 @@
 
 <div class="random_tweets">
 </div>
+<br>
+<div class="followed">
+	<% @user.friends.each do |friend| %>
+		<a href="<%= friend.url %>"><%= friend.screen_name %></a><br><br>
+		
+	<% end %>
+</div>
 
 <% end %>
 </div><footer>

@@ -56,6 +56,9 @@ get '/mentions' do
 end
 
 get '/random' do
+   puts session[:screen_name] if session[:screen_name]
+   session[:screen_name].clear if session[:screen_name]
+   puts session[:screen_name]
    @user = User.find(session[:user_id])
   
   # client = Twitter::REST::Client.new do |config|
@@ -88,8 +91,9 @@ post '/random' do
   @random = random_tweet(client, params[:word])
   @message = @random.text
   @screen_name = @random.user.screen_name
+  @url = @random.user.uri.to_s
   puts @screen_name
-  {random: @message, screen_name: @screen_name}.to_json
+  {random: @message, screen_name: @screen_name, url: @url}.to_json
 end
 
 post '/follow' do
@@ -102,10 +106,20 @@ post '/follow' do
     config.access_token_secret = @user.oauth_secret
   end
 
-  client.follow(params[:screen_name])
+  @screen_name = params[:screen_name]
+  @url = params[:url]
+  Friend.create(screen_name: @screen_name, url: @url, user_id: @user.id)
+  session[:screen_name] = @screen_name
+  client.follow(@screen_name)
+
+  redirect "/followed"
 end
 
+get '/followed' do
+  @screen_name = session[:screen_name]
+  erb :followed
 
+end
 
 
 
