@@ -3,7 +3,7 @@
 
   <% if session[:user_id] %>
 <div id="tweet">
-  <a href="/">Tweet Now</a>|<a href="/mentions">Mentions</a>|<a href="/random">Random</a>|<a href="/followed">Followed</a>|<a href="http://www.twitter.com/#{@user.username}"><%=@user.username%></a><br><br>
+  <a href="/">Tweet Now</a>|<a href="/mentions">Mentions</a>|<a href="/random">Random</a>|<a href="/followed">Followed</a>|<a target="_blank" href="http://www.twitter.com/<%=@user.username%>"><%=@user.username%></a>|<a href="/sign_out">Sign Out</a><br><br>
 </div>
 
 <center>

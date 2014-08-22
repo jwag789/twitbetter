@@ -3,19 +3,21 @@
 
   <% if session[:user_id] %>
 <div id="tweet">
-  <a href="/">Tweet Now</a>|<a href="/mentions">Mentions</a>|<a href="/random">Random</a>|<a href="/followed">Followed</a><br><br>
+  <a href="/">Tweet Now</a>|<a href="/mentions">Mentions</a>|<a href="/random">Random</a>|<a href="/followed">Followed</a>|<a target="_blank" href="http://www.twitter.com/<%=@user.username%>"><%=@user.username%></a>|<a href="/sign_out">Sign Out</a><br><br>
 </div>
-  <h2>Hello, <%= @user.username %></h2>
-
+  <h2>Users you have followed</h2>
+<center>
 <div class="followed">
 	<% @friends.each do |friend| %>
-		<a href="<%= friend.url %>"><%= friend.screen_name %></a><br><br>
+	<div class="followed_item">
+		<img src="<%=friend.image%>">
+		<a target="_blank" href="<%= friend.url %>"><%= friend.screen_name %></a><br><br>
 		<%= friend.description %>
-		
+	</div>
 	<% end %>
 
 </div>
-
+</center>
 <% end %>
 </div><footer>
 <br>Made by JTWeet

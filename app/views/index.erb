@@ -9,23 +9,21 @@
   %>
   <% if session[:user_id] %>
 <div id="tweet">
-  <a href="/">Tweet Now</a>|<a href="/mentions">Mentions</a>|<a href="/random">Random</a>|<a href="/followed">Followed</a><br><br>
+  <a href="/">Tweet Now</a>|<a href="/mentions">Mentions</a>|<a href="/random">Random</a>|<a href="/followed">Followed</a>|<a target="_blank" href="http://www.twitter.com/<%=@user.username%>"><%=@user.username%></a>|<a href="/sign_out">Sign Out</a><br><br>
   <form action="/tweet" method="post">
     <textarea rows="4" cols="30" name="text"></textarea><br><br>
     <input type="submit" value="Tweet!">
   </form>
 
   <br><br>
-      <p>
-        <button><a href="/sign_out">Sign Out</a></button>
-      </p>
     </div>
   <% else %>
-  <br><br>
-    <form id="sign_in" action="/sign_in" method="get">
+  <br><br><br><br><br><br>
+   <div class="big"> <form id="sign_in" action="/sign_in" method="get">
       <input type="submit" value="Sign In with Twitter" />
     </form>
-    <br><br><br><br><br><br><br><br>
+  </div>
+    <br><br><br><br><br>
   <% end %>
 
 

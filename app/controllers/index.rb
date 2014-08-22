@@ -1,4 +1,5 @@
 get '/' do
+  @user = User.find(session[:user_id]) if session[:user_id]
   erb :index
 end
 
@@ -93,8 +94,9 @@ post '/random' do
   @screen_name = @random.user.screen_name
   @url = @random.user.uri.to_s
   @description = @random.user.description
+  @image = @random.user.profile_image_uri_https.to_s
   puts @screen_name
-  {random: @message, screen_name: @screen_name, url: @url, description: @description}.to_json
+  {random: @message, screen_name: @screen_name, url: @url, description: @description, image: @image}.to_json
 end
 
 post '/follow' do
@@ -110,7 +112,8 @@ post '/follow' do
   @screen_name = params[:screen_name]
   @url = params[:url]
   @description = params[:description]
-  Friend.create(screen_name: @screen_name, url: @url, description: @description, user_id: @user.id)
+  @image = params[:image]
+  Friend.create(screen_name: @screen_name, url: @url, description: @description, user_id: @user.id, image: @image)
   client.follow(@screen_name)
 
   {follow_name: @screen_name, follow_url: @url}.to_json
@@ -118,7 +121,7 @@ end
 
 get '/followed' do
   @user = User.find(session[:user_id])
-  @friends = @user.friends
+  @friends = @user.friends.reverse
   puts @friends
   erb :followed
 end

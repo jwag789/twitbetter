@@ -13,6 +13,7 @@ function getRandomTweet(event){
 		 	var screen_name = data['screen_name'];
 		 	var url = data['url']
 		 	var description = data['description']
+		 	var image = data['image']
 		 	console.log(rand);
 		 	console.log(screen_name)
 		 	console.log(description)
@@ -20,10 +21,11 @@ function getRandomTweet(event){
 		 	"<input type='hidden' name='screen_name' value='" + screen_name + "'>" +
 		 	"<input type='hidden' name='url' value='" + url + "'>" +
 		    "<input type='hidden' name='description' value='" + description + "'>" + 
+		    "<input type='hidden' name='image' value='" + image + "'>" + 
 		    "<input type='submit' value='Follow User?'>" 
 		 	+ "</form>"
 
-		 	$(".random_tweets").html("<p>" + rand + "</p>" + followForm)
+		 	$(".random_tweets").html("<div class='big'><p>" + rand + "</p></div>" + followForm).hide().fadeIn(500)
 		 })
 }
 
@@ -39,8 +41,8 @@ function followUser(event){
 			console.log('done with follow')
 			var follow_name = data['follow_name']
 			var follow_url = data['follow_url']
-			$(".random_tweets").append("<br>You have just followed " +
-			"<a href='" + follow_url + "'>" + follow_name + "</a>")
+			$(".random_tweets").html("<br><div class='big'>You have just followed " +
+			"<a target='_blank' href='" + follow_url + "'>" + follow_name + "</a></div>").hide().fadeIn(500)
 		})
 }
 
