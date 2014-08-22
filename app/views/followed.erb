@@ -2,7 +2,19 @@
   <h1>Twitter Random</h1>
 
   <% if session[:user_id] %>
-<h1>YOU HAVE FOLLOWED <%= @screen_name %></h1>
+<div id="tweet">
+  <a href="/">Tweet Now</a>|<a href="/mentions">Mentions</a>|<a href="/random">Random</a>|<a href="/followed">Followed</a><br><br>
+</div>
+  <h2>Hello, <%= @user.username %></h2>
+
+<div class="followed">
+	<% @friends.each do |friend| %>
+		<a href="<%= friend.url %>"><%= friend.screen_name %></a><br><br>
+		<%= friend.description %>
+		
+	<% end %>
+
+</div>
 
 <% end %>
 </div><footer>

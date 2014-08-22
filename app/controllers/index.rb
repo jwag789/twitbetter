@@ -92,8 +92,9 @@ post '/random' do
   @message = @random.text
   @screen_name = @random.user.screen_name
   @url = @random.user.uri.to_s
+  @description = @random.user.description
   puts @screen_name
-  {random: @message, screen_name: @screen_name, url: @url}.to_json
+  {random: @message, screen_name: @screen_name, url: @url, description: @description}.to_json
 end
 
 post '/follow' do
@@ -108,18 +109,21 @@ post '/follow' do
 
   @screen_name = params[:screen_name]
   @url = params[:url]
-  Friend.create(screen_name: @screen_name, url: @url, user_id: @user.id)
-  session[:screen_name] = @screen_name
+  @description = params[:description]
+  Friend.create(screen_name: @screen_name, url: @url, description: @description, user_id: @user.id)
   client.follow(@screen_name)
 
-  redirect "/followed"
+  {follow_name: @screen_name, follow_url: @url}.to_json
 end
 
 get '/followed' do
-  @screen_name = session[:screen_name]
+  @user = User.find(session[:user_id])
+  @friends = @user.friends
+  puts @friends
   erb :followed
-
 end
+
+
 
 
 
