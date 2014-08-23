@@ -91,6 +91,19 @@ post '/random' do
 
   @random = random_tweet(client, params[:word])
   @message = @random.text
+  @split_message = @message.split(" ")
+  matches = @message.scan(/http:\/\/[^ !"*()]+/)
+  @split_message.each do |word|
+    if matches.include?(word)
+      puts "SO AWESOMEEEE"
+      puts word
+      puts word
+      puts word
+      word.gsub!(word, "<a href='#{word}'>#{word}</a>")
+    end
+  end
+  @message = @split_message.join(" ")
+
   @screen_name = @random.user.screen_name
   @url = @random.user.uri.to_s
   @description = @random.user.description
